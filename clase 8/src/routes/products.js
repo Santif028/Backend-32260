@@ -13,11 +13,11 @@ productsRouter.get("/:pid", async (req, res) => {
     let id = req.params.pid;
     let productId = await products.getProductById(id);
     if (!productId) {
-        res.status(404)
+        res.status(404);
         res.send("ID not found");
     } else {
-        res.status(200)
-        res.send(productId)
+        res.status(200);
+        res.send(productId);
     }
 });
 

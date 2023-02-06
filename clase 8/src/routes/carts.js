@@ -14,11 +14,11 @@ cartsRouter.get("/:cid", async (req, res) => {
     let id = req.params.cid;
     let cartId = await carts.getCartById(id);
     if (!cartId) {
-        res.status(404)
+        res.status(404);
         res.send("ID not Found");
     } else {
-        res.status(200)
-        res.send(cartId.products)
+        res.status(200);
+        res.send(cartId.products);
     };
 });
 
