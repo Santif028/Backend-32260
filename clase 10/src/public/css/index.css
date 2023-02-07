@@ -1,0 +1,105 @@
+h1 {
+  margin: 40px 0;
+  text-decoration: underline 2px black;
+  text-align: center;
+}
+
+#navbarNav .navbar-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+#navbarNav .navbar-nav li {
+  border-radius: 5px;
+}
+
+#navbarNav .navbar-nav li:hover {
+  background-color: rgba(128, 128, 128, 0.408);
+}
+
+.containerDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.containerDetails img {
+  width: 300px;
+  height: auto;
+  max-height: 650px;
+}
+
+.containerProducts {
+  grid-area: products;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  padding-top: 0;
+  width: 100%;
+}
+
+.containerProducts .products {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.containerProducts .products img {
+  min-height: 250px;
+  max-height: 250px;
+}
+
+#containerRealTime {
+  display: grid;
+  grid-template-areas: "form form form"
+                      "products products products";
+  min-height: 80vh;
+  width: 100%;
+  padding: 0 50px;
+}
+
+#containerRealTime h2 {
+  width: 100%;
+  color: white;
+}
+
+#containerRealTime form {
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  border-radius: 5px;
+  padding: 30px 20px;
+  max-height: 400px;
+  max-width: fit-content;
+  gap: 10px;
+
+}
+
+#containerRealTime button:hover {
+  transform: scale(1.05);
+}
+
+#containerRealTime .iconTrash {
+  width: 30px;
+  background-color: white;
+  position: absolute;
+  right: 0;
+  padding: 5px;
+  border-radius: 0 5px 0 5px;
+}
+
+#containerRealTime .iconTrash:hover {
+  transform: scale(1.1);
+  fill: red;
+  cursor: pointer;
+}
+
