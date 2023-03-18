@@ -9,6 +9,7 @@ import {
     serviceAddCart
 } from "../services/cart.js";
 
+
 const getCarts = async (req, res) => {
     const carts = await serviceGetCarts();
     res.send(carts);
@@ -24,7 +25,7 @@ const addCart = async (req, res) =>{
     const newCart = await serviceAddCart();
     res.send(newCart);
 }
-
+ 
 const getProductsInCart = async (req, res) => {
     const id = req.params.cid;
     const productsInCart = await serviceGetProductsInCart(id);
