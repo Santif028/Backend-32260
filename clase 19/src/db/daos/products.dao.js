@@ -5,8 +5,7 @@ class ProductsDAOMongoDb extends ContenedorMongoDb {
     async getProducts() {
         try {
             const products = await this.getAll();
-            const allProducts = await products.paginate({ category: "productos" }, { limit: 5, page: 1 })
-            return allProducts;
+            return products;
         } catch (error) {
             throw new Error(error)
         }

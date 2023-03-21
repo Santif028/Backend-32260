@@ -20,7 +20,7 @@ authRouter.post("/login", sessionValidate, async (req, res) => {
         res.render("login-error", { user,  style: "index.css" });
     } else {
         req.session.user = userFound.email;
-        res.redirect("/api/products", {user: req.session.user});
+        res.redirect("/api/products");
     }
 });
 

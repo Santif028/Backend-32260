@@ -1,5 +1,5 @@
 <div id="containerCart">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
@@ -9,35 +9,36 @@
           <li class="nav-item">
             <a class="nav-link" href="/api/carts">Cart</a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link" onclick="location.href='/auth/logout'">Cart</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
-    <h1>Cart</h1>
-    <div id="productsInCart">
-        <table>
-            <tbody>
-                {{#each productsInCart}}
-                <tr>
-                    <td> <img class="cartProductImg" src="{{this.product.thumbnail}}" alt="{{this.product.title}}">
-                    </td>
-                    <td>
-                        <p>{{this.product.title}}</p>
-                    </td>
-                    <td>
-                        <p>{{this.quantity}}</p>
-                    </td>
-                    <td>
-                        <p>{{this.product.price}}</p>
-                    </td>
-                    <td><button class="cardButton"
-                            onclick="deleteProductInCart('{{this.product._id}}')">Eliminar</button></td>
-                </tr>
-                {{/each}}
+  <h1>Cart</h1>
+  <div id="productsInCart">
+    <table>
+      <tbody>
+        {{#each productsInCart}}
+        <tr>
+          <td> <img class="cartProductImg" src="{{this.product.thumbnail}}" alt="{{this.product.title}}">
+          </td>
+          <td>
+            <p>{{this.product.title}}</p>
+          </td>
+          <td>
+            <p>{{this.quantity}}</p>
+          </td>
+          <td>
+            <p>{{this.product.price}}</p>
+          </td>
+          <td><button class="cardButton" onclick="deleteProductInCart('{{this.product._id}}')">Eliminar</button></td>
+        </tr>
+        {{/each}}
 
-            </tbody>
-        </table>
-    </div>
+      </tbody>
+    </table>
+  </div>
 </div>
 <script src="/js/index.js"></script>

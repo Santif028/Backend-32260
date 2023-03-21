@@ -9,13 +9,15 @@
           <li class="nav-item">
             <a class="nav-link" href="/api/carts">Cart</a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link" onclick="location.href='/auth/logout'">Cart</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
     <h1>All products</h1>
-    <button class="btn btn-danger my-5" onclick="location.href='/auth/logout'">LOGOUT</button>
+    
     <div class="products">
         {{#each products}}
         <div class="card" style="width: 18rem;">
