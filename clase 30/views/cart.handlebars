@@ -1,0 +1,29 @@
+<div id="containerCart">
+  <h1>Cart</h1>
+  {{#if productsInCart}}
+  <div id="productsInCart">
+    <table>
+      <tbody>
+        {{#each productsInCart}}
+        <tr>
+          <td> <img class="cartProductImg" src="{{this.thumbnail}}" alt="{{this.title}}">
+          </td>
+          <td>
+            <p>{{this.title}}</p>
+          </td>
+          <td id="cartQuantity">
+            <p>{{this.quantity}}</p>
+          </td>
+          <td>
+            <p>{{this.price}}</p>
+          </td>
+          <td><button class="btn btn-danger my-3" onclick="deleteProductInCart('{{this._id}}')">Eliminar</button></td>
+        </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+  {{/if}}
+</div>
+<script src="/js/cart.js"></script>
