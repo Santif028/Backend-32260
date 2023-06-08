@@ -26,7 +26,7 @@ paths:
             schema:
               $ref: "#components/requestBodies/Product"
       responses:
-        "200":
+        "201":
           description: Producto agregado de manera satisfactoria
           content:
             application/json:
@@ -74,7 +74,7 @@ paths:
             schema:
               $ref: "#components/requestBodies/Product"
       responses:
-        "200":
+        "201":
           description: Producto actualizado de manera satisfactoria
           content:
             application/json:
