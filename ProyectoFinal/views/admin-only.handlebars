@@ -1,0 +1,91 @@
+<div class="containerAdmin">
+    <h1>Admin View</h1>
+    <h2>Welcome, {{user.user}}</h2>
+
+    <h3>Users:</h3>
+    <ul>
+        {{#each allUsers}}
+        <li>
+            <form class="form" role="form" autocomplete="off" id="formUserAdmin">
+                <input type="hidden" name="userId" value="{{_id}}">
+                <label for="username">Username:</label>
+                <input type="text" name="username" value="{{user}}" readonly>
+                <label for="email">Email:</label>
+                <input type="email" name="email" value="{{email}}" readonly>
+                <label for="age">Age:</label>
+                <input type="number" name="age" value="{{age}}" readonly>
+                <label for="age">Role:</label>
+                <input id="newRole-{{_id}}" type="text" name="newRole" value="{{role}}">
+                <button type="button" class="btn btn-outline-success"
+                    onclick="updateUserRole('{{_id}}')">Update</button>
+                <button type="button" class="btn btn-outline-danger"
+                    onclick="deleteUserById('{{_id}}')">Eliminar</button>
+            </form>
+        </li>
+        {{/each}}
+    </ul>
+
+    <h3>Products:</h3>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add Product
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="form" role="form" autocomplete="off" id="formProductAdmin">
+                        <label for="title" class="form-label">Title:</label>
+                        <input id="title" type="text" name="title" class="form-control" required>
+                        <label for="description" class="form-label">Description:</label>
+                        <input id="description" type="text" name="description" class="form-control" required>
+                        <label for="price" class="form-label">Price:</label>
+                        <input id="price" type="number" name="price" class="form-control" required>
+                        <label for="thumbnail" class="form-label">Thumbnail:</label>
+                        <input id="thumbnail" type="text" name="thumbnail" class="form-control" required>
+                        <label for="code" class="form-label">Code:</label>
+                        <input id="code" type="text" name="code" class="form-control" required>
+                        <label for="stock" class="form-label">Stock:</label>
+                        <input id="stock" type="number" name="stock" class="form-control" required>
+                        <label for="category" class="form-label">Category:</label>
+                        <input id="category" type="text" name="category" class="form-control" required>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="createNewProduct()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul>
+        {{#each allProducts}}
+        <li>
+            <form class="form" role="form" autocomplete="off" id="formProductAdmin">
+                <input type="hidden" name="productId" value="{{_id}}">
+                <label for="title">Title:</label>
+                <input type="text" name="title" value="{{title}}">
+                <label for="description">Description:</label>
+                <input type="text" name="description" value="{{description}}">
+                <label for="price">Price:</label>
+                <input type="number" name="price" value="{{price}}">
+                <label for="stock">Stock:</label>
+                <input type="number" name="stock" value="{{stock}}">
+                <label for="category">Category:</label>
+                <input type="text" name="category" value="{{category}}">
+                <button type="button" class="btn btn-outline-success" {{!-- onclick="updateProduct('{{_id}}')"
+                    --}}>Update</button>
+                <button type="button" class="btn btn-outline-danger"
+                    onclick="deleteProductById('{{_id}}')">Eliminar</button>
+            </form>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+<script src="/js/adminView.js"></script>
