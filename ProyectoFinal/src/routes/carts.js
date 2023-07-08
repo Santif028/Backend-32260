@@ -11,7 +11,7 @@ import {
     purchase
 } from "../controllers/cartManager.js";
 import { authMiddleware } from "../middlewares/index.js";
-import { processPayment } from "../controllers/stripeManager.js";
+import {  processPayment } from "../controllers/stripeManager.js";
 
 cartsRouter.post("/", authMiddleware, addCart);
 cartsRouter.get("/quantity/:cid", getQtyInCart);

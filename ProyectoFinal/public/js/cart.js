@@ -1,3 +1,5 @@
+import { loadStripe } from "@stripe/stripe-js";
+
 const addProductToCart = async (cid, pid) => {
   const baseUrl = `${window.location.protocol}//${window.location.host}/api/`;
   const endpoint = `carts/${cid}/product/${pid}`;
@@ -71,3 +73,58 @@ const setQuantity = async (pid) => {
   })
   await getCart()
 };
+
+const handlePayment = async (cid) => {
+  try {
+    const payButton = document.getElementById('pay-button');
+    payButton.disabled = true;
+
+    const stripeClient = await loadStripe(process.env.STRIPE_PUBLIC_KEY);
+
+    const elements = stripeClient.elements()
+    const cardElement = elements.create('card');
+
+    cardElement.mount('#card-element');
+
+    const baseUrl = `${window.location.protocol}//${window.location.host}/api/`;
+    const endpoint = `carts/${cid}/purchase`;
+    const url = `${baseUrl}${endpoint}`;
+
+    const response = await fetch(url, {
+      method: "post",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      const { clientSecret } = await response.json();
+
+      const result = await stripeClient.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardElement,
+        },
+      });
+
+
+      // Verifica el resultado del pago
+      if (result.error) {
+        // Maneja el error del pago
+        console.error(result.error);
+      } else {
+        // El pago se realizó con éxito
+        console.log(result.paymentIntent);
+        // Realiza acciones adicionales si es necesario
+      }
+    } else {
+      // Maneja el error de la solicitud al backend
+      throw new Error('Error al procesar el pago');
+    }
+  } catch (error) {
+    console.error('Error al procesar el pago:', error);
+  }
+
+
+}

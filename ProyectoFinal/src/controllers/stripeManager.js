@@ -1,12 +1,15 @@
+import Stripe from "stripe";
 import { productModel } from "../models/products.model.js";
 import { cartModel } from "../models/carts.model.js";
 import PaymentService from "../services/stripe.js";
+
+const stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const processPayment = async (req, res) => {
     try {
         const { cid } = req.params
 
-        const userCart = await cartModel.findOne({ _id: cid });
+        const userCart = await cartModel.findById(cid).populate('products.product');
 
         let amount = 0
 
@@ -16,15 +19,13 @@ export const processPayment = async (req, res) => {
         }
 
         // Crea una carga en Stripe
-        const charge = {
+        const charge = await stripeClient.paymentIntents.create({
             amount,
             currency: 'usd',
-        };
-        const service = new PaymentService();
-        let result = await service.createPaymentIntent(charge);
-        console.log(result);
+        });
+        console.log(charge);
 
-        res.status(200).json({ message: 'Pago procesado correctamente.', result });
+        res.status(200).json({ clientSecret: charge.client_secret});
     } catch (error) {
         console.error('Error al procesar el pago:', error);
         res.status(500).json({ error: 'Hubo un error al procesar el pago.' });
