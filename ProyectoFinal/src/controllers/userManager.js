@@ -123,9 +123,9 @@ const deleteInactiveUsers = async (req, res) => {
 
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
-                    console.log('Error sending email:', error);
+                    res.json('Error sending email:', error);
                 } else {
-                    console.log('Email sent:', info.response);
+                    res.json('Email sent:', info.response);
                 }
             });
         });

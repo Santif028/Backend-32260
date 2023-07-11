@@ -14,9 +14,9 @@ const isUserAdmin = (user) => {
 };
 
 const getProducts = async (req, res) => {
+    let user = req.session.user;
     try {
         const products = await serviceGetProducts(req.query);
-        let user = req.session.user;
         let isAdmin = isUserAdmin(user);
         const hasNextPage = products.hasNextPage
         const hasPrevPage = products.hasPrevPage
@@ -28,32 +28,48 @@ const getProducts = async (req, res) => {
         res.status(200).render("home", { title: "Products", style: "index.css", products, hasNextPage, hasPrevPage, sort, page, query, categories, user, isAdmin });
 
     } catch (error) {
-        res.status(500).send(error.message)
+        res.status(500).send("Error trying to get all products");
     }
 }
 
 const getProductById = async (req, res) => {
     const id = req.params.pid;
-    let product = await serviceGetProductById(id);
     let user = req.session.user;
-    let isAdmin = isUserAdmin(user);
-    res.render("details", { product, user, isAdmin, title: "Products", style: "index.css" });
+    try {
+        let product = await serviceGetProductById(id);
+        let isAdmin = isUserAdmin(user);
+        res.render("details", { product, user, isAdmin, title: "Products", style: "index.css" });
+    } catch (error) {
+        res.status(500).send("Error trying to get a product by id")
+    }
 }
 
 const addProduct = async (req, res) => {
-    const newProduct = await serviceAddProduct(req.body);
-    res.status(201).send({ status: "success", message: "Registered succesfully!", payload: newProduct });
+    try {
+        const newProduct = await serviceAddProduct(req.body);
+        res.status(201).send({ status: "success", message: "Registered succesfully!", payload: newProduct });
+    } catch (error) {
+        res.status(500).send("Error adding new Product");
+    }
 }
 
 const updateProduct = async (req, res) => {
     const id = req.params.pid
-    const updateProduct = await serviceUpdateProduct(id, req.body);
-    res.status(200).send("Product updated successfully");
+    try {
+        const updateProduct = await serviceUpdateProduct(id, req.body);
+        res.status(200).send({ message: "Product updated successfully", updateProduct });
+    } catch (error) {
+        res.status(500).send("Error trying to update product");
+    }
 }
 
 const deleteAllProducts = async (req, res) => {
-    const deleteAllProducts = await serviceDeleteAllProducts();
-    res.status(200).send("Products deleted");
+    try {
+        const deleteAllProducts = await serviceDeleteAllProducts();
+        res.status(200).send({ message: "Products deleted", deleteAllProducts });
+    } catch (error) {
+        res.status(500).send("Error trying to delete all products")
+    }
 }
 
 const deleteProductById = async (req, res) => {
